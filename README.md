@@ -67,17 +67,19 @@ Please use a private repo just email us when you are done.
 ## Your Solution Starts HERE!!!
 Use this area to describe your solution as requested in *_Section B_*. 
 
-1. AWS Tool & SDKs, these will be used for automation to handle the Ingestion process.
-2. AWS Step Functions, this will be the main orchestration tool for the automated ingestion process. Keeping track of all tasks as they are executed, tracking progress, successes and/or failures and reporting accordingly.
-3. AWS Lambda functions will be used for some of the steps, for example, a function to trigger a Glue Crawler job.
-4. AWS Kinesis Data Firehose, will be used to stream data from the On-Prem data center into an Amazon S3 bucket.
-5. AWS Glue, glue jobs will be used to trun ETL transformation tasks. This will be to transform the raw input data which is in either JSON and/or CSV to Parquet form. Making use of Parquet in the data lake will improve performance. 
-6. AWS Glue Crawler will be used to monitor the S3 bucket for any new data available for processing.
-7. AWS Secrets Manager will be used in conjuction with the Lambda functions in providing any secrets required in accessing raw data as it becomes available. 
-8. AWS Glue Data Catalog will be used as the central repository for all the data assets in the data lake. All meta data for the solution be stored and tracked in the catalog.
-9. Amazon DynamoDB, this will be used as a secondary store of the schema data derived from the Data Catalog.
-10. Amazon S3 bucket will store the final output of the Parquet output after all transformation steps are complete in AWS Glue.
-11. Amazon Athena will be used to query the output data at the end of the process. 
+1. AWS CkoudFormation will be used to setup the environment in AWS, in conjuction with AWS CodeBuild which will contain the CodeBuild Project.
+2. AWS Tool & SDKs, these will be used for automation to handle the Ingestion process.
+3. AWS Step Functions, this will be the main orchestration tool for the automated ingestion process. Keeping track of all tasks as they are executed, tracking progress, successes and/or failures and reporting accordingly.
+4. AWS Lambda functions will be used for some of the steps, for example, a function to trigger a Glue Crawler job.
+5. AWS Kinesis Data Firehose, will be used to stream data from the On-Prem data center into an Amazon S3 bucket.
+6. AWS Glue, glue jobs will be used to trun ETL transformation tasks. This will be to transform the raw input data which is in either JSON and/or CSV to Parquet form. Making use of Parquet in the data lake will improve performance. 
+7. AWS Glue Crawler will be used to monitor the S3 bucket for any new data available for processing.
+8. AWS Secrets Manager will be used in conjuction with the Lambda functions in providing any secrets required in accessing raw data as it becomes available. 
+9. AWS Glue Data Catalog will be used as the central repository for all the data assets in the data lake. All meta data for the solution be stored and tracked in the catalog.
+10. Amazon DynamoDB, this will be used as a secondary store of the schema data derived from the Data Catalog.
+11. Amazon S3 bucket will store the final output of the Parquet output after all transformation steps are complete in AWS Glue.
+12. Amazon Athena will be used to query the output data at the end of the process.
+13. AWS CloudWatch will be used to monitor and logging events in the entire environment and respond accordingly. 
 
 
 ## Additional Comments / Information / Concerns
