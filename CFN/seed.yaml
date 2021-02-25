@@ -77,12 +77,36 @@ Resources:
   ####################################
   # IAM:
   ####################################
-  
+  AdminRole :
+  Type : AWS::IAM::Role
+  Properties :
+    RoleName : BuildAdminRole
+    ManagedPolicyArns : 
+    - !Ref IAMCodeBuildPoliciesARNs
+    AssumeRolePolicyDocument :
+      Version : "2012-10-17"
+      Statement : 
+        Effect : Allow
+        Principal:
+          Service : 
+            - codebuild.amazonaws.com
+        Action : sts:AssumeRole
+    Tags: 
+    - Key : environment
+      Value : !Ref Environment
 
   ####################################
   # VPC resources:
   ####################################
-  
+  SecurityGroup:
+  Type: AWS::EC2::SecurityGroup
+  Properties: 
+    GroupDescription: "Security group for VPC"
+    GroupName: "vpcSG"
+    Tags: 
+      - Key : environment
+        Value : !Ref Environment
+    VpcId: !Ref VpcID
 
 
   ####################################
@@ -93,11 +117,50 @@ Resources:
   ####################################
   # CodeBuild:
   ####################################
+  Project:
+  Type: AWS::CodeBuild::Project
+  Properties:
+    Name: aws-challenge
+    Sevice Role: !Ref BuildAdminRole
+    Artifacts:
+      Type: no_artifacts
+    
+    VpcConfig:
+      VpcId: !Ref VpcID
+      Subnets : !Ref PrivateSubnetIDs
+      SecurityGroupIds :
+        - !Ref SecurityGroup
+
+    Environment:
+      Type: LINUX_CONTAINER
+      ComputeType: BUILD_GENERAL1_SMALL
+      Image: aws/codebuild/standard:2.0
+      EnvironmentVariables:
+      - Name: "aplicationName"
+        Type: "PLAINTEXT"
+        Value: "aws-challenge"
+
+    Source:
+      Location: !Ref ConfigRepoURL
+      Type: GITHUB
+    TimeoutInMinutes: 10
+    Tags:
+      - Key: GitSSHPrivateKey
+        Value: Value1
+      - Key: Key2
+        Value: Value2
   
   ####################################
   # Terraform state:
   ####################################
-  
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "aws-challenge-${AWS::Region}"
+      AccessControl: Private
+      Tags:
+        - Key: Name
+          Value: TFstateBucket
 
 ####################################
 # PARAMETERS IN SSM PARAMETER STORE:
