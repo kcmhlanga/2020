@@ -82,3 +82,6 @@ Use this area to describe your solution as requested in *_Section B_*.
 
 ## Additional Comments / Information / Concerns
 Add info here.
+
+1. The diagram from the architecture in under the MEDIA folder.
+- Filename: IngestArchitecture.png
