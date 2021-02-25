@@ -67,7 +67,7 @@ Please use a private repo just email us when you are done.
 ## Your Solution Starts HERE!!!
 Use this area to describe your solution as requested in *_Section B_*. 
 
-1. AWS CkoudFormation will be used to setup the environment in AWS, in conjuction with AWS CodeBuild which will contain the CodeBuild Project.
+1. AWS CloudFormation will be used to setup the environment in AWS, in conjuction with AWS CodeBuild which will contain the CodeBuild Project.
 2. AWS Tool & SDKs, these will be used for automation to handle the Ingestion process.
 3. AWS Step Functions, this will be the main orchestration tool for the automated ingestion process. Keeping track of all tasks as they are executed, tracking progress, successes and/or failures and reporting accordingly.
 4. AWS Lambda functions will be used for some of the steps, for example, a function to trigger a Glue Crawler job.
